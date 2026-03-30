@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team RYU × RYOSEI — プロジェクト引き継ぎ資料</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a365d;
+    --navy-light: #2c5282;
+    --navy-pale: #ebf4ff;
+    --gold: #D4A017;
+    --gold-light: #f6e8b1;
+    --gold-pale: #fdf8e8;
+    --text: #1a202c;
+    --text-mid: #4a5568;
+    --text-light: #718096;
+    --bg: #ffffff;
+    --bg-warm: #fafaf8;
+    --border: #e2e8f0;
+    --green: #38a169;
+    --green-pale: #f0fff4;
+    --green-border: #c6f6d5;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(26, 54, 93, 0.08);
+    --shadow-hover: 0 8px 32px rgba(26, 54, 93, 0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    color: var(--text);
+    line-height: 1.85;
+    background: var(--bg-warm);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, #0f2440 60%, #1a365d 100%);
+    color: white;
+    text-align: center;
+    padding: 64px 32px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 70%, rgba(212,160,23,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(255,255,255,0.04) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  .header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .header .gold-line {
+    width: 60px;
+    height: 3px;
+    background: var(--gold);
+    margin: 16px auto;
+    border-radius: 2px;
+  }
+  .header .subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    opacity: 0.85;
+    letter-spacing: 0.06em;
+  }
+  .header .date {
+    margin-top: 20px;
+    font-size: 13px;
+    opacity: 0.55;
+  }
+
+  /* ===== NAV / TOC ===== */
+  .toc {
+    max-width: 960px;
+    margin: -28px auto 0;
+    padding: 0 24px;
+    position: relative;
+    z-index: 10;
+  }
+  .toc-inner {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    align-items: center;
+  }
+  .toc-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-right: 8px;
+  }
+  .toc-inner a {
+    font-size: 13px;
+    color: var(--navy-light);
+    text-decoration: none;
+    padding: 4px 0;
+    border-bottom: 1.5px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .toc-inner a:hover {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ===== SEARCH ===== */
+  .search-box {
+    margin-bottom: 36px;
+    position: relative;
+  }
+  .search-box input {
+    width: 100%;
+    padding: 14px 20px 14px 48px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-family: inherit;
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .search-box input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.15);
+  }
+  .search-box .search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    font-size: 18px;
+  }
+  .search-results {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--text-light);
+    display: none;
+  }
+
+  /* ===== SECTION TITLES ===== */
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 48px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--gold);
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ===== GREETING ===== */
+  .greeting {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 36px 40px;
+    margin-bottom: 8px;
+    position: relative;
+    border-left: 5px solid var(--gold);
+  }
+  .greeting p {
+    font-size: 15px;
+    margin-bottom: 14px;
+    color: var(--text-mid);
+  }
+  .greeting p:last-of-type { margin-bottom: 0; }
+  .greeting .sign {
+    text-align: right;
+    margin-top: 24px;
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 15px;
+  }
+
+  /* ===== QUICKSTART ===== */
+  .quickstart {
+    background: var(--green-pale);
+    border: 2px solid var(--green);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin-bottom: 8px;
+  }
+  .quickstart h3 {
+    color: #22543d;
+    font-size: 17px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .quickstart p {
+    font-size: 14px;
+    color: var(--text-mid);
+    margin-bottom: 10px;
+  }
+  .quickstart .step {
+    background: white;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 8px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+  }
+  .quickstart .step-num {
+    background: var(--green);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ===== FOLDER TREE ===== */
+  .tree {
+    background: var(--navy);
+    color: #e2e8f0;
+    border-radius: 8px;
+    padding: 20px 24px;
+    font-family: "Consolas", "Monaco", "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin-top: 16px;
+  }
+  .tree .folder { color: var(--gold); font-weight: 700; }
+  .tree .file { color: #a0aec0; }
+  .tree .count { color: #718096; font-size: 11px; }
+
+  /* ===== ACCORDION ===== */
+  .accordion {
+    margin-bottom: 12px;
+  }
+  .accordion-header {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .accordion-header:hover {
+    border-color: var(--gold);
+    box-shadow: var(--shadow);
+  }
+  .accordion.active .accordion-header {
+    border-color: var(--gold);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background: var(--gold-pale);
+  }
+  .accordion-header .folder-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .accordion-header .folder-icon {
+    width: 42px;
+    height: 42px;
+    background: var(--navy-pale);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .accordion.active .accordion-header .folder-icon {
+    background: var(--gold);
+  }
+  .accordion.active .accordion-header .folder-icon span {
+    filter: brightness(10);
+  }
+  .accordion-header .folder-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .accordion-header .folder-meta {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 2px;
+  }
+  .accordion-header .badge {
+    background: var(--navy-pale);
+    color: var(--navy-light);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .accordion-header .arrow {
+    color: var(--text-light);
+    font-size: 18px;
+    transition: transform 0.3s;
+    margin-left: 12px;
+  }
+  .accordion.active .accordion-header .arrow {
+    transform: rotate(180deg);
+  }
+  .accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    border: 1.5px solid var(--gold);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    background: white;
+  }
+  .accordion.active .accordion-body {
+    max-height: 2000px;
+  }
+  .accordion-content {
+    padding: 24px 28px;
+  }
+  .accordion-content p {
+    font-size: 14px;
+    color: var(--text-mid);
+    margin-bottom: 16px;
+    line-height: 1.8;
+  }
+  .accordion-content h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 18px 0 10px;
+    padding-left: 10px;
+    border-left: 3px solid var(--gold);
+  }
+
+  /* file list */
+  .file-list {
+    list-style: none;
+    margin: 8px 0;
+  }
+  .file-list li {
+    padding: 6px 10px;
+    font-size: 13px;
+    color: var(--text-mid);
+    border-bottom: 1px solid #f7fafc;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .file-list li:last-child { border-bottom: none; }
+  .file-list .ext {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .ext-md { background: #e9d8fd; color: #553c9a; }
+  .ext-pdf { background: #fed7d7; color: #c53030; }
+  .ext-xlsx { background: #c6f6d5; color: #276749; }
+  .ext-pptx { background: #feebc8; color: #c05621; }
+  .ext-docx { background: #bee3f8; color: #2b6cb0; }
+  .ext-csv { background: #e2e8f0; color: #4a5568; }
+  .ext-html { background: #fefcbf; color: #975a16; }
+
+  .subfolder-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy-light);
+    margin: 14px 0 6px;
+    padding: 6px 10px;
+    background: var(--navy-pale);
+    border-radius: 6px;
+    display: inline-block;
+  }
+
+  /* ===== PROPOSAL SECTION ===== */
+  .proposal-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .proposal-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .proposal-card:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: var(--gold);
+  }
+  .proposal-card .card-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .proposal-card .card-label.now { color: var(--green); }
+  .proposal-card .card-label.next { color: var(--gold); }
+  .proposal-card .card-label.future { color: var(--navy-light); }
+  .proposal-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .proposal-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .proposal-card li {
+    font-size: 13px;
+    color: var(--text-mid);
+    padding: 4px 0;
+    padding-left: 18px;
+    position: relative;
+  }
+  .proposal-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--text-light);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .footer p { margin-bottom: 6px; }
+  .footer .heart { color: var(--gold); }
+
+  /* ===== HIGHLIGHT FOR SEARCH ===== */
+  .highlight-match {
+    background: var(--gold-light);
+    border-radius: 2px;
+    padding: 0 2px;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    .header { padding: 48px 20px 40px; }
+    .header h1 { font-size: 22px; }
+    .toc { margin-top: -20px; padding: 0 12px; }
+    .toc-inner { padding: 14px 16px; }
+    .container { padding: 24px 14px 60px; }
+    .greeting { padding: 24px 20px; }
+    .quickstart { padding: 20px; }
+    .accordion-header { padding: 14px 16px; }
+    .accordion-header .folder-icon { width: 36px; height: 36px; font-size: 16px; }
+    .accordion-header .folder-name { font-size: 14px; }
+    .accordion-content { padding: 18px 16px; }
+    .section-title { font-size: 18px; }
+    .proposal-cards { grid-template-columns: 1fr; }
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    body { background: white; }
+    .toc, .search-box { display: none; }
+    .header { border-radius: 0; page-break-after: avoid; }
+    .accordion-body { max-height: none !important; overflow: visible; border: 1px solid #ccc; }
+    .accordion-header .arrow { display: none; }
+    .container { padding: 20px; }
+    .proposal-cards { grid-template-columns: 1fr; }
+    .accordion { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <h1>Team RYU &times; RYOSEI</h1>
+  <div class="gold-line"></div>
+  <p class="subtitle">プロジェクト引き継ぎ資料 &mdash; これまでの感謝を込めて</p>
+  <p class="date">バックオフィス改革プロジェクト / 2026年3月</p>
+</header>
+
+<!-- ===== TOC ===== -->
+<nav class="toc">
+  <div class="toc-inner">
+    <span class="toc-label">Contents</span>
+    <a href="#greeting">ご挨拶</a>
+    <a href="#quickstart">クイックスタート</a>
+    <a href="#folders">フォルダ詳細</a>
+    <a href="#proposal">今後の活用提案</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- ===== SEARCH ===== -->
+  <div class="search-box">
+    <span class="search-icon">&#128269;</span>
+    <input type="text" id="searchInput" placeholder="ファイル名で検索..." oninput="handleSearch(this.value)">
+    <div class="search-results" id="searchResults"></div>
+  </div>
+
+  <!-- ===== 1. GREETING ===== -->
+  <div id="greeting">
+    <h2 class="section-title"><span class="num">1</span>ご挨拶</h2>
+    <div class="greeting">
+      <p>Team RYUの皆さま、これまで本当にありがとうございました。</p>
+      <p>短い期間ではありましたが、バックオフィス改革という大きなプロジェクトに携わらせていただき、自分自身にとっても非常に学びの多い時間でした。隆一さんをはじめ、南村さん、丹下さん、守屋さん、前島さん、皆さまと一緒にお仕事できたことを心から嬉しく思っています。</p>
+      <p>この引き継ぎ資料には、プロジェクトで作成した業務フロー、テンプレート、マニュアル、セキュリティ規程など、すべてのナレッジをまとめています。Team RYUの今後の業務に少しでもお役に立てれば、これ以上嬉しいことはありません。</p>
+      <p>何かわからないことがあれば、いつでも気軽に聞いてください。</p>
+      <p class="sign">今井涼晴 / RYOSEI</p>
+    </div>
+  </div>
+
+  <!-- ===== 2. QUICKSTART ===== -->
+  <div id="quickstart">
+    <h2 class="section-title"><span class="num">2</span>クイックスタート</h2>
+    <div class="quickstart">
+      <h3>&#9889; すぐに使い始める方法</h3>
+      <div class="step">
+        <span class="step-num">1</span>
+        <div>「引き継ぎ資料」フォルダをそのままGoogle Driveにアップロードしてください。フォルダ構成がそのまま維持されます。</div>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <div>まずは <strong>04_テンプレート</strong> のExcelファイルを確認 &mdash; 管理台帳やチェックリストがそのまま使えます。</div>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <div><strong>01_業務フロー</strong> で現状の業務の流れ（As-Is）を把握し、改善ポイントを確認してください。</div>
+      </div>
+
+      <!-- TREE -->
+      <div class="tree">
+<span class="folder">引き継ぎ資料/</span>
+├── <span class="folder">00_はじめに/</span> <span class="count">... この資料</span>
+├── <span class="folder">01_業務フロー/</span> <span class="count">(18ファイル)</span>
+│   ├── <span class="folder">給与計算/</span>
+│   ├── <span class="folder">振込/</span>
+│   └── <span class="folder">税務/</span>
+├── <span class="folder">02_ロードマップ・計画/</span> <span class="count">(23ファイル)</span>
+├── <span class="folder">03_セキュリティ/</span> <span class="count">(9ファイル)</span>
+│   ├── <span class="folder">01_ルール・規定/</span>
+│   ├── <span class="folder">02_マニュアル・手順書/</span>
+│   ├── <span class="folder">03_権限設計・フォルダ設計/</span>
+│   ├── <span class="folder">04_誓約書・同意書/</span>
+│   └── <span class="folder">06_管理台帳/</span>
+├── <span class="folder">04_テンプレート/</span> <span class="count">(27ファイル)</span>
+├── <span class="folder">05_提案資料・プレゼン/</span> <span class="count">(18ファイル)</span>
+├── <span class="folder">06_議事録・MTG/</span> <span class="count">(17ファイル)</span>
+├── <span class="folder">07_マニュアル・ガイド/</span> <span class="count">(8ファイル)</span>
+├── <span class="folder">08_プロジェクト管理/</span> <span class="count">(18ファイル)</span>
+├── <span class="folder">09_自動化（Yoom・GAS）/</span> <span class="count">(2ファイル)</span>
+└── <span class="folder">10_契約・費用/</span> <span class="count">(4ファイル)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 3. FOLDER DETAILS ===== -->
+  <div id="folders">
+    <h2 class="section-title"><span class="num">3</span>フォルダ別の詳細</h2>
+
+    <!-- 01 -->
+    <div class="accordion" data-folder="01">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="folder-info">
+          <div class="folder-icon"><span>&#128203;</span></div>
+          <div>
+            <div class="folder-name">01_業務フロー</div>
+            <div class="folder-meta">給与計算・振込・税務の現状フロー（As-Is）</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge">18ファイル</span>
+          <span class="arrow">&#9660;</span>
+        </div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p>バックオフィスの中核となる3つの業務領域（給与計算・振込・税務）について、現状の業務フロー（As-Is）を整理しています。ヒアリングに基づいた実態をフローチャートやQA表でまとめているので、業務改善の出発点としてご活用ください。</p>
+
+          <h4>全体</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-html">html</span>業務フロー_AsIs_完全版_20260325.html</li>
+          </ul>
+
+          <span class="subfolder-label">給与計算/（5ファイル）</span>
+          <ul class="file-list">
+            <li><span class="ext ext-md">md</span>業務フロー_給与計算_AsIs_20260325.md</li>
+            <li><span class="ext ext-md">md</span>給与パターン整理フォーマット_20260313.md</li>
+            <li><span class="ext ext-xlsx">xlsx</span>Team RYU 給与計算チェック.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>group_payroll_flow.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>host_payroll_flow.xlsx</li>
+          </ul>
+
+          <span class="subfolder-label">振込/（10ファイル）</span>
+          <ul class="file-list">
+            <li><span class="ext ext-md">md</span>業務フロー_振込_AsIs_20260325.md</li>
+            <li><span class="ext ext-md">md</span>給与振込フローツリー_20260313.md</li>
+            <li><span class="ext ext-md">md</span>給与振込_Yoom自動化フローツリー.md</li>
+            <li><span class="ext ext-pptx">pptx</span>給与振込フロー_As-Is_v8.1_20260318.pptx</li>
+            <li><span class="ext ext-pdf">pdf</span>給与振込フローツリー_20260313.pdf</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&A】給与振込管理.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&A】スタッフ口座マスタ.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&A】口座情報入力フォーム.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>給与振込フロー_QA表_20260313.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>給与振込フロー_ヒアリング項目表.xlsx</li>
+          </ul>
+
+          <span class="subfolder-label">税務/（2ファイル）</span>
+          <ul class="file-list">
+            <li><span class="ext ext-md">md</span>業務フロー_税務処理_AsIs_20260325.md</li>
+            <li><span class="ext ext-xlsx">xlsx</span>tax_flow.xlsx</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="accordion" data-folder="02">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="folder-info">
+          <div class="folder-icon"><span>&#128506;</span></div>
+          <div>
+            <div class="folder-name">02_ロードマップ・計画</div>
+            <div class="folder-meta">バックオフィス改革の全体計画とPhase1実装計画</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge">23ファイル</span>
+          <span class="arrow">&#9660;</span>
+        </div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p>プロジェクトの全体ロードマップ、Dropbox分析、自動化候補リスト、経理カレンダーなど、改革の道筋を示す計画書一式です。Phase1実装計画やタイムラインは、次のアクションを決める際の参考にしてください。</p>
+
+          <h4>ロードマップ・サマリー</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-md">md</span>00_ロードマップ概要.md</li>
+            <li><span class="ext ext-pptx">pptx</span>M&A バックオフィス改革 エグゼクティブサマリー v2.0.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>M&A バックオフィス改革 エグゼクティブサマリー v2.1(修正版).pptx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>M&A バックオフィス改革ロードマップ v2.0.xlsx</li>
+            <li><span class="ext ext-pptx">pptx</span>M&Aグループ バックオフィス改革ロードマップ v02.pptx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>M&Aグループ バックオフィス改革ロードマップ【完全版】v02.xlsx</li>
+          </ul>
+
+          <h4>Phase1・タイムライン</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-pptx">pptx</span>M&A株式会社 Phase1 進め方（隆一さん確認用）.pptx</li>
+            <li><span class="ext ext-pdf">pdf</span>Phase1実装計画_20260313.pdf</li>
+            <li><span class="ext ext-md">md</span>タイムライン_20260318.md</li>
+            <li><span class="ext ext-md">md</span>タイムライン_20260319.md</li>
+          </ul>
+
+          <h4>分析・調査</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-md">md</span>01_Dropboxフォルダ分析レポート.md</li>
+            <li><span class="ext ext-md">md</span>02_Dropboxフォルダ整理提案.md</li>
+            <li><span class="ext ext-md">md</span>03_自動化候補リスト.md</li>
+            <li><span class="ext ext-md">md</span>04_銀行窓口トークスクリプト.md</li>
+            <li><span class="ext ext-md">md</span>05_ツール権限マトリクス.md</li>
+            <li><span class="ext ext-md">md</span>06_経理カレンダー.md</li>
+          </ul>
+
+          <h4>セキュリティ関連計画</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-md">md</span>07_個人情報管理規程_エグゼクティブサマリー.md</li>
+            <li><span class="ext ext-pdf">pdf</span>07_個人情報管理規程_エグゼクティブサマリー.pdf</li>
+            <li><span class="ext ext-md">md</span>08_LINE個人情報禁止通達.md</li>
+            <li><span class="ext ext-pdf">pdf</span>08_LINE個人情報禁止通達.pdf</li>
+            <li><span class="ext ext-md">md</span>09_身分証廃棄フロー簡易マニュアル.md</li>
+            <li><span class="ext ext-pdf">pdf</span>09_身分証廃棄フロー簡易マニュアル.pdf</li>
+          </ul>
+
+          <h4>業務フロー</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-md">md</span>01_業務フロー_給与振込.md</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="accordion" data-folder="03">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="folder-info">
+          <div class="folder-icon"><span>&#128274;</span></div>
+          <div>
+            <div class="folder-name">03_セキュリティ</div>
+            <div class="folder-meta">情報セキュリティ規程・LINE禁止通達・退職者対応</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge">9ファイル</span>
+          <span class="arrow">&#9660;</span>
+        </div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p>情報セキュリティに関する規程、マニュアル、権限設計、誓約書テンプレートをまとめています。特に「個人LINE業務利用禁止」の通達や退職者の情報管理手順は、すぐに社内で共有・運用できる内容です。</p>
+
+          <span class="subfolder-label">01_ルール・規定/（3ファイル）</span>
+          <ul class="file-list">
+            <li><span class="ext ext-docx">docx</span>個人LINE業務利用禁止_通達文書.docx</li>
+            <li><span class="ext ext-docx">docx</span>個人LINE業務利用禁止_運用マニュアル.docx</li>
+            <li><span class="ext ext-docx">docx</span>個人情報保管期間・破棄規定.docx</li>
+          </ul>
+
+          <span class="subfolder-label">02_マニュアル・手順書/（3ファイル）</span>
+          <ul class="file-list">
+            <li><span class="ext ext-docx">docx</span>スマホPC紛失時_緊急対応マニュアル.docx</li>
+            <li><span class="ext ext-docx">docx</span>退職時情報管理手順書.docx</li>
+            <li><span class="ext ext-docx">docx</span>退職者Googleアカウント停止マニュアル.docx</li>
+          </ul>
+
+          <span class="subfolder-label">03_権限設計・フォルダ設計/（1ファイル）</span>
+          <ul class="file-list">
+            <li><span class="ext ext-xlsx">xlsx</span>共有ドライブ_権限マトリクス表.xlsx</li>
+          </ul>
+
+          <span class="subfolder-label">04_誓約書・同意書/（1ファイル）</span>
+          <ul class="file-list">
+            <li><span class="ext ext-docx">docx</span>個人情報保護_業務ツール利用誓約書.docx</li>
+          </ul>
+
+          <span class="subfolder-label">06_管理台帳/（1ファイル）</span>
+          <ul class="file-list">
+            <li><span class="ext ext-xlsx">xlsx</span>タスク一覧_情報セキュリティ移行.xlsx</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="accordion" data-folder="04">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="folder-info">
+          <div class="folder-icon"><span>&#128196;</span></div>
+          <div>
+            <div class="folder-name">04_テンプレート</div>
+            <div class="folder-meta">Excel管理台帳・CSVテンプレート &mdash; そのまま使えます</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge">27ファイル</span>
+          <span class="arrow">&#9660;</span>
+        </div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p>日常業務ですぐに使えるテンプレート集です。管理台帳、チェックリスト、振込CSV、通知テンプレートなど、実務で必要になるものを一通り揃えています。Excelファイルはそのまま開いて使えます。</p>
+
+          <h4>管理規程・フロー（md + xlsx セット）</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-xlsx">xlsx</span>10_個人情報管理規程.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>11_承認フロー設計書.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>12_給与計算標準化マニュアル.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>13_GoogleWorkspace運用ガイドライン.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>14_IT権限管理台帳テンプレート.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>15_退職者アカウント削除フロー.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>16_投資案件稟議フォーマット.xlsx</li>
+          </ul>
+
+          <h4>実務テンプレート</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-xlsx">xlsx</span>【M&A】スタッフ口座情報マスタ.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&A】ツール・権限マトリクス.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&A】振込チェックリスト.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&A】業務フロー・自動化候補.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&A】経理カレンダー（月次・年次）.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&A】通知テンプレート集（Yoom用）.xlsx</li>
+          </ul>
+
+          <h4>銀行振込CSV</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-csv">csv</span>振込CSV_UFJ用.csv</li>
+            <li><span class="ext ext-csv">csv</span>振込CSV_愛知銀行用.csv</li>
+          </ul>
+
+          <h4>その他</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-md">md</span>17_組織図_メンバー一覧.md</li>
+            <li><span class="ext ext-md">md</span>18_LINE禁止_GoogleChat移行フロー_ペライチ.md</li>
+            <li><span class="ext ext-docx">docx</span>週次プロジェクトMTG アジェンダテンプレート.docx</li>
+            <li><span class="ext ext-docx">docx</span>銀行窓口対応トークスクリプト＆チェックリスト v1.0.docx</li>
+          </ul>
+
+          <p style="font-size:12px;color:var(--text-light);margin-top:12px;">※ md/pdf版は同内容のテキスト版です。Excelが使えない環境でもご確認いただけます。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="accordion" data-folder="05">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="folder-info">
+          <div class="folder-icon"><span>&#127912;</span></div>
+          <div>
+            <div class="folder-name">05_提案資料・プレゼン</div>
+            <div class="folder-meta">エグゼクティブサマリー・DX導入計画・自己紹介</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge">18ファイル</span>
+          <span class="arrow">&#9660;</span>
+        </div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p>社内プレゼンや提案に使用したスライド資料です。バックオフィス改革の提案書、DX導入計画（LINE移行フロー）、朝会プレゼン台本などが含まれています。今後の社内説明資料としても再利用できます。</p>
+
+          <h4>提案・計画</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-pptx">pptx</span>株式会社M&A_組織改革プロジェクト_全体像.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>社内DX導入計画_LINE移行フロー.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>社内DX導入計画_LINE移行フロー_v2.pptx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【バックオフィス改革】体制・役割・費用構造.xlsx</li>
+            <li><span class="ext ext-pptx">pptx</span>グロジャンフェスタ2026_提案資料_v3.pptx</li>
+          </ul>
+
+          <h4>営業資料</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-md">md</span>AIOX_TeamRYU_サービス概要_最新.md</li>
+            <li><span class="ext ext-pptx">pptx</span>AIOX_TeamRYU_営業資料.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>AIOX_TeamRYU_営業資料_v2.pptx</li>
+            <li><span class="ext ext-docx">docx</span>Dropboxフォルダ構成分析レポート v1.0.docx</li>
+          </ul>
+
+          <h4>朝会・プレゼン</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-md">md</span>朝会プレゼン台本_20260318.md</li>
+            <li><span class="ext ext-md">md</span>朝会QA想定_20260318.md</li>
+          </ul>
+
+          <h4>自己紹介</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-pptx">pptx</span>SELF_INTRODUCTION_RYOSEI.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>今井涼晴_自己紹介ピッチ.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>今井涼晴_自己紹介ピッチ_v2.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>りょうせい_自己紹介ピッチ_v2.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>涼晴_自己紹介ピッチ_v2.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>涼晴_自己紹介ピッチ_v3.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>涼晴_自己紹介ピッチ_v4.pptx</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="accordion" data-folder="06">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="folder-info">
+          <div class="folder-icon"><span>&#128221;</span></div>
+          <div>
+            <div class="folder-name">06_議事録・MTG</div>
+            <div class="folder-meta">Meet録画メモ・ヒアリング議事録</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge">17ファイル</span>
+          <span class="arrow">&#9660;</span>
+        </div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p>プロジェクト期間中の全ミーティング議事録です。Google Meetの自動録画メモ（Gemini）、個別ヒアリングの記録を含みます。過去の経緯や決定事項を振り返る際にご活用ください。</p>
+
+          <h4>ヒアリング議事録</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-docx">docx</span>【M&A】丹下様ヒアリング - 2026_03_25 - Gemini メモ.docx</li>
+            <li><span class="ext ext-docx">docx</span>【M&A】南村様ヒアリング - 2026_03_25 - Gemini メモ.docx</li>
+            <li><span class="ext ext-docx">docx</span>【M&A】守屋様ヒアリング - 2026_03_25 - Gemini メモ.docx</li>
+            <li><span class="ext ext-docx">docx</span>前島さん顔合わせ+状況input - 2026_03_16 - Gemini メモ.docx</li>
+            <li><span class="ext ext-docx">docx</span>真実 / 涼晴 - 2026_03_20 - Gemini メモ.docx</li>
+          </ul>
+
+          <h4>会議録画メモ</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-docx">docx</span>2026_03_17 15:14 JST 会議 - Gemini メモ.docx</li>
+            <li><span class="ext ext-docx">docx</span>2026_03_18 10:07 JST 会議 - Gemini メモ.docx</li>
+          </ul>
+
+          <h4>議事録・まとめ</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-md">md</span>meeting_20260313_ryuichi.md</li>
+            <li><span class="ext ext-html">html</span>meeting_20260313_共有用.html</li>
+            <li><span class="ext ext-md">md</span>meeting_20260313_共有用.md</li>
+            <li><span class="ext ext-pdf">pdf</span>meeting_20260313_共有用.pdf</li>
+            <li><span class="ext ext-md">md</span>meeting_20260316_maeshima.md</li>
+            <li><span class="ext ext-pdf">pdf</span>会議議事録_20260313.pdf</li>
+            <li><span class="ext ext-html">html</span>議事録まとめ_全ヒアリング_20260325.html</li>
+          </ul>
+
+          <h4>テンプレート</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-xlsx">xlsx</span>M&Aバックオフィスヒアリングシート.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>ヒアリングシート＆MTGアジェンダ_バックオフィス改革_v02.xlsx</li>
+            <li><span class="ext ext-md">md</span>議事録テンプレート.md</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="accordion" data-folder="07">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="folder-info">
+          <div class="folder-icon"><span>&#128214;</span></div>
+          <div>
+            <div class="folder-name">07_マニュアル・ガイド</div>
+            <div class="folder-meta">Google Workspace操作・Claude Code導入ガイド</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge">8ファイル</span>
+          <span class="arrow">&#9660;</span>
+        </div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p>業務で使用するツールのマニュアルです。Google Workspaceの操作方法、Claude Codeの導入手順、Yoomの調査レポートなどを含みます。新しいメンバーのオンボーディングにもお使いいただけます。</p>
+
+          <ul class="file-list">
+            <li><span class="ext ext-html">html</span>GoogleWorkspace_操作マニュアル.html</li>
+            <li><span class="ext ext-html">html</span>ClaudeCode_導入ガイド_20260313.html</li>
+            <li><span class="ext ext-pdf">pdf</span>ClaudeCode_導入ガイド_20260313.pdf</li>
+            <li><span class="ext ext-html">html</span>Claude Code セットアップウィザード.html</li>
+            <li><span class="ext ext-html">html</span>claude_code_setup_wizard.html</li>
+            <li><span class="ext ext-pptx">pptx</span>やりたいこと別 Claude 使い分けガイド.pptx</li>
+            <li><span class="ext ext-html">html</span>yoom_構築進捗_20260315.html</li>
+            <li><span class="ext ext-html">html</span>yoom_調査レポート_20260315.html</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 08 -->
+    <div class="accordion" data-folder="08">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="folder-info">
+          <div class="folder-icon"><span>&#128202;</span></div>
+          <div>
+            <div class="folder-name">08_プロジェクト管理</div>
+            <div class="folder-meta">PMBOK準拠の管理文書・進捗管理表・WBS</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge">18ファイル</span>
+          <span class="arrow">&#9660;</span>
+        </div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p>PMBOK（プロジェクトマネジメント知識体系）に準拠したプロジェクト管理文書一式です。プロジェクト憲章、WBS、リスク登録簿、ステークホルダー管理台帳など、プロジェクト運営に必要な文書がそろっています。</p>
+
+          <h4>PMBOK管理文書</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-md">md</span>01_プロジェクト憲章.md</li>
+            <li><span class="ext ext-md">md</span>02_スコープ記述書.md</li>
+            <li><span class="ext ext-md">md</span>03_WBS.md</li>
+            <li><span class="ext ext-md">md</span>04_スケジュール_ガントチャート.md</li>
+            <li><span class="ext ext-md">md</span>05_リスク登録簿.md</li>
+            <li><span class="ext ext-md">md</span>06_ステークホルダー管理台帳.md</li>
+            <li><span class="ext ext-md">md</span>07_コミュニケーション計画.md</li>
+            <li><span class="ext ext-md">md</span>08_課題管理台帳.md</li>
+            <li><span class="ext ext-md">md</span>09_変更管理台帳.md</li>
+          </ul>
+
+          <h4>計画・報告</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-md">md</span>phase1_implementation_plan_20260313.md</li>
+            <li><span class="ext ext-pdf">pdf</span>Phase1実装計画_20260313.pdf</li>
+            <li><span class="ext ext-md">md</span>次期アクションプラン_20260305.md</li>
+          </ul>
+
+          <h4>運用ツール</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-xlsx">xlsx</span>プロジェクト管理ボード.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>進捗管理表_株式会社M&A組織改革プロジェクト.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>デイリー報告.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>承認フロー管理.xlsx</li>
+            <li><span class="ext ext-docx">docx</span>MTG運用ルール.docx</li>
+            <li><span class="ext ext-docx">docx</span>アジェンダテンプレート.docx</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 09 -->
+    <div class="accordion" data-folder="09">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="folder-info">
+          <div class="folder-icon"><span>&#9889;</span></div>
+          <div>
+            <div class="folder-name">09_自動化（Yoom・GAS）</div>
+            <div class="folder-meta">業務自動化の設計書</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge">2ファイル</span>
+          <span class="arrow">&#9660;</span>
+        </div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p>Yoom（ノーコード自動化ツール）やGAS（Google Apps Script）を使った業務自動化の設計書です。給与振込の自動化フローや、通知テンプレートの設計を含みます。</p>
+
+          <ul class="file-list">
+            <li><span class="ext ext-md">md</span>給与振込_Yoom自動化フローツリー.md</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&A】通知テンプレート集（Yoom用）.xlsx</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="accordion" data-folder="10">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="folder-info">
+          <div class="folder-icon"><span>&#128176;</span></div>
+          <div>
+            <div class="folder-name">10_契約・費用</div>
+            <div class="folder-meta">契約書・請求書・費用構造</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge">4ファイル</span>
+          <span class="arrow">&#9660;</span>
+        </div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p>プロジェクトに関する契約書、請求書、費用構造のドキュメントです。</p>
+
+          <ul class="file-list">
+            <li><span class="ext ext-md">md</span>コンサルティング業務委託契約書.md</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【バックオフィス改革】体制・役割・費用構造.xlsx</li>
+            <li><span class="ext ext-md">md</span>請求書_202603.md</li>
+            <li><span class="ext ext-pdf">pdf</span>請求書_202603.pdf</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== 4. PROPOSAL ===== -->
+  <div id="proposal">
+    <h2 class="section-title"><span class="num">4</span>今後の活用提案</h2>
+    <p style="font-size:15px;color:var(--text-mid);margin-bottom:20px;">これらの資料を最大限に活用していただくために、3つのステップをご提案します。</p>
+
+    <div class="proposal-cards">
+      <div class="proposal-card">
+        <div class="card-label now">Now &mdash; すぐやれること</div>
+        <h4>今日から使える</h4>
+        <ul>
+          <li><strong>04_テンプレート</strong> のExcel台帳を実務で活用（振込チェックリスト、経理カレンダーなど）</li>
+          <li><strong>03_セキュリティ</strong> のLINE禁止通達・誓約書を社内に共有</li>
+          <li><strong>07_マニュアル</strong> のGoogle Workspace操作ガイドを新人研修に</li>
+        </ul>
+      </div>
+
+      <div class="proposal-card">
+        <div class="card-label next">Next &mdash; 次のステップ</div>
+        <h4>1~3ヶ月で取り組む</h4>
+        <ul>
+          <li><strong>01_業務フロー</strong> のAs-Isを元に、To-Be（理想フロー）を作成</li>
+          <li><strong>09_自動化</strong> のYoomフロー設計を参考に、自動化を実装</li>
+          <li><strong>08_プロジェクト管理</strong> のボードで進捗管理を定着させる</li>
+        </ul>
+      </div>
+
+      <div class="proposal-card">
+        <div class="card-label future">Future &mdash; 長期的な改善</div>
+        <h4>3ヶ月以降の取り組み</h4>
+        <ul>
+          <li><strong>02_ロードマップ</strong> に沿ったDX推進の継続</li>
+          <li>Dropboxフォルダ整理・Google Workspace完全移行</li>
+          <li>PMBOK管理手法の社内定着と継続的改善</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <p>何かご不明な点があれば、いつでもお気軽にご連絡ください。</p>
+  <p style="margin-top:12px;font-size:12px;opacity:0.6;">Team RYU &times; RYOSEI &mdash; バックオフィス改革プロジェクト 2026</p>
+</footer>
+
+<script>
+// ===== ACCORDION =====
+function toggleAccordion(header) {
+  const accordion = header.parentElement;
+  const wasActive = accordion.classList.contains('active');
+
+  // Close all
+  document.querySelectorAll('.accordion').forEach(a => a.classList.remove('active'));
+
+  // Toggle clicked
+  if (!wasActive) {
+    accordion.classList.add('active');
+    // Scroll into view
+    setTimeout(() => {
+      header.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+  }
+}
+
+// ===== SEARCH =====
+function handleSearch(query) {
+  const results = document.getElementById('searchResults');
+  const allItems = document.querySelectorAll('.file-list li');
+
+  if (!query.trim()) {
+    results.style.display = 'none';
+    allItems.forEach(li => {
+      li.style.display = '';
+      li.style.background = '';
+    });
+    // Reset accordion visibility
+    document.querySelectorAll('.accordion').forEach(a => a.style.display = '');
+    document.querySelectorAll('.subfolder-label, .accordion-content h4, .accordion-content p').forEach(el => el.style.display = '');
+    return;
+  }
+
+  const q = query.toLowerCase();
+  let matchCount = 0;
+  const matchedAccordions = new Set();
+
+  allItems.forEach(li => {
+    const text = li.textContent.toLowerCase();
+    if (text.includes(q)) {
+      li.style.display = '';
+      li.style.background = 'var(--gold-pale)';
+      matchCount++;
+      // Find parent accordion
+      const acc = li.closest('.accordion');
+      if (acc) {
+        matchedAccordions.add(acc);
+        acc.classList.add('active');
+      }
+    } else {
+      li.style.display = 'none';
+      li.style.background = '';
+    }
+  });
+
+  // Show/hide accordions
+  document.querySelectorAll('.accordion').forEach(a => {
+    if (matchedAccordions.has(a)) {
+      a.style.display = '';
+    } else {
+      a.style.display = 'none';
+    }
+  });
+
+  results.style.display = 'block';
+  results.textContent = matchCount > 0
+    ? `${matchCount}件のファイルが見つかりました`
+    : '該当するファイルが見つかりません';
+}
+</script>
+
+</body>
+</html>
