@@ -265,21 +265,59 @@
     margin-top: 1px;
   }
 
-  /* ===== FOLDER TREE ===== */
-  .tree {
-    background: var(--navy);
-    color: #e2e8f0;
-    border-radius: 8px;
-    padding: 20px 24px;
-    font-family: "Consolas", "Monaco", "Courier New", monospace;
-    font-size: 13px;
-    line-height: 1.7;
-    overflow-x: auto;
+  /* ===== FOLDER CARDS ===== */
+  .folder-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
     margin-top: 16px;
   }
-  .tree .folder { color: var(--gold); font-weight: 700; }
-  .tree .file { color: #a0aec0; }
-  .tree .count { color: #718096; font-size: 11px; }
+  .folder-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .folder-card:hover {
+    border-color: var(--gold);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+  .folder-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .folder-card-header .folder-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .folder-card-header .folder-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .folder-card .folder-desc {
+    font-size: 13px;
+    color: var(--text-mid);
+    margin: 0 0 10px;
+    line-height: 1.6;
+  }
+  .folder-card .subfolder-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+  }
+  .folder-card .subfolder-list span {
+    font-size: 12px;
+    color: var(--text-light);
+    background: var(--navy-pale);
+    padding: 3px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
 
   /* ===== ACCORDION ===== */
   .accordion {
@@ -520,6 +558,7 @@
     .accordion-content { padding: 18px 16px; }
     .section-title { font-size: 18px; }
     .proposal-cards { grid-template-columns: 1fr; }
+    .folder-cards-grid { grid-template-columns: 1fr; }
   }
 
   /* ===== PRINT ===== */
@@ -583,55 +622,119 @@
   <!-- ===== 2. フォルダ構成 ===== -->
   <div id="structure">
     <h2 class="section-title"><span class="num">2</span>フォルダ構成</h2>
-    <div class="quickstart">
-      <h3>&#128194; どこに何が入っているか</h3>
-      <p style="color: var(--text-mid); font-size: 14px; margin-bottom: 16px;">Team RYU自身で使うであろうフォーマットの資料等を格納しています。AIでの出力結果のため、実際の運用に合わせてカスタマイズしてご利用ください。</p>
-      <div class="tree">
-<span class="folder">TeamRYU_共有ドライブ/</span>
-├── <span class="folder">00_はじめに/</span> <span class="count">... この資料</span>
-├── <span class="folder">01_議事録/</span>
-│   ├── <span class="folder">デイリーMTG/</span>
-│   └── <span class="folder">M&amp;A/</span>
-├── <span class="folder">02_契約・法務/</span>
-│   └── <span class="folder">テンプレート/</span> <span class="count">(業務委託契約書・NDA・発注書・見積書・請求書)</span>
-├── <span class="folder">03_経理・請求/</span>
-├── <span class="folder">04_人事・労務/</span>
-│   ├── <span class="folder">就業規則/</span>
-│   ├── <span class="folder">給与規程/</span>
-│   ├── <span class="folder">雇用契約書/</span>
-│   ├── <span class="folder">入退社手続き/</span>
-│   ├── <span class="folder">勤怠管理/</span>
-│   ├── <span class="folder">社会保険・労働保険/</span>
-│   ├── <span class="folder">有給休暇管理/</span>
-│   └── <span class="folder">組織図・人員配置/</span>
-├── <span class="folder">05_プロジェクト/</span>
-│   ├── <span class="folder">M&amp;Aバックオフィス/</span>
-│   │   ├── <span class="folder">業務フロー/</span>
-│   │   │   ├── <span class="folder">給与計算/</span>
-│   │   │   ├── <span class="folder">振込/</span>
-│   │   │   └── <span class="folder">税務/</span>
-│   │   ├── <span class="folder">ロードマップ・計画/</span>
-│   │   ├── <span class="folder">セキュリティ/</span>
-│   │   │   ├── <span class="folder">ルール・規定/</span>
-│   │   │   ├── <span class="folder">マニュアル/</span>
-│   │   │   ├── <span class="folder">権限設計/</span>
-│   │   │   ├── <span class="folder">誓約書/</span>
-│   │   │   └── <span class="folder">管理台帳/</span>
-│   │   ├── <span class="folder">自動化/</span>
-│   │   │   └── <span class="folder">Claude/</span> <span class="count">(導入ガイド・セットアップ・使い分けガイド)</span>
-│   │   ├── <span class="folder">提案資料/</span>
-│   │   ├── <span class="folder">マニュアル・ガイド/</span>
-│   │   ├── <span class="folder">テンプレート/</span> <span class="count">(Excel管理台帳・チェックリスト等27ファイル)</span>
-│   │   └── <span class="folder">プロジェクト管理/</span> <span class="count">(PMBOK文書・Phase1計画)</span>
-│   ├── <span class="folder">globe/</span> <span class="count">(今後用)</span>
-│   ├── <span class="folder">旅録/</span> <span class="count">(今後用)</span>
-│   └── <span class="folder">隆一さんSNS運用/</span> <span class="count">(今後用)</span>
-├── <span class="folder">06_テンプレート/</span> <span class="count">(Team RYU共通用)</span>
-├── <span class="folder">07_社内規定/</span> <span class="count">(Team RYU共通用)</span>
-└── <span class="folder">08_共有資料/</span>
-    ├── <span class="folder">自己紹介/</span> <span class="count">(自己紹介ピッチ資料)</span>
-    └── AIOX_TeamRYU_サービス概要.html
+    <p style="color: var(--text-mid); font-size: 14px; margin-bottom: 20px; background: var(--green-pale); border: 1.5px solid var(--green-border); border-radius: var(--radius); padding: 16px 20px;">Team RYU自身で使うであろうフォーマットの資料等を格納しています。AIでの出力結果のため、実際の運用に合わせてカスタマイズしてご利用ください。</p>
+
+    <div class="folder-cards-grid">
+
+      <div class="folder-card">
+        <div class="folder-card-header">
+          <span class="folder-icon">&#128193;</span>
+          <span class="folder-name">00_はじめに</span>
+        </div>
+        <p class="folder-desc">この引き継ぎガイド（README.html）を格納</p>
       </div>
+
+      <div class="folder-card">
+        <div class="folder-card-header">
+          <span class="folder-icon">&#128193;</span>
+          <span class="folder-name">01_議事録</span>
+        </div>
+        <p class="folder-desc">デイリーMTG、M&amp;A関連の議事録・ヒアリングシート</p>
+        <div class="subfolder-list">
+          <span>&#128194; デイリーMTG</span>
+          <span>&#128194; M&amp;A</span>
+        </div>
+      </div>
+
+      <div class="folder-card">
+        <div class="folder-card-header">
+          <span class="folder-icon">&#128193;</span>
+          <span class="folder-name">02_契約・法務</span>
+        </div>
+        <p class="folder-desc">契約書テンプレート（業務委託・NDA・発注書・見積書・請求書）</p>
+        <div class="subfolder-list">
+          <span>&#128194; テンプレート</span>
+        </div>
+      </div>
+
+      <div class="folder-card">
+        <div class="folder-card-header">
+          <span class="folder-icon">&#128193;</span>
+          <span class="folder-name">03_経理・請求</span>
+        </div>
+        <p class="folder-desc">請求書・経費精算・月次決算資料（今後格納予定）</p>
+      </div>
+
+      <div class="folder-card">
+        <div class="folder-card-header">
+          <span class="folder-icon">&#128193;</span>
+          <span class="folder-name">04_人事・労務</span>
+        </div>
+        <p class="folder-desc">就業規則・給与規程・雇用契約書等のテンプレートを各フォルダに格納済み</p>
+        <div class="subfolder-list">
+          <span>&#128194; 就業規則</span>
+          <span>&#128194; 給与規程</span>
+          <span>&#128194; 雇用契約書</span>
+          <span>&#128194; 入退社手続き</span>
+          <span>&#128194; 勤怠管理</span>
+          <span>&#128194; 社会保険・労働保険</span>
+          <span>&#128194; 有給休暇管理</span>
+          <span>&#128194; 組織図・人員配置</span>
+        </div>
+      </div>
+
+      <div class="folder-card">
+        <div class="folder-card-header">
+          <span class="folder-icon">&#128193;</span>
+          <span class="folder-name">05_プロジェクト</span>
+        </div>
+        <p class="folder-desc">PMBOK準拠の標準プロジェクト構成（7フォルダ）で各案件を管理</p>
+        <div class="subfolder-list">
+          <span>&#128194; 01_M&amp;Aバックオフィス</span>
+          <span>&#128194; 02_globe</span>
+          <span>&#128194; 03_旅録</span>
+          <span>&#128194; 04_隆一さんSNS運用</span>
+        </div>
+      </div>
+
+      <div class="folder-card">
+        <div class="folder-card-header">
+          <span class="folder-icon">&#128193;</span>
+          <span class="folder-name">06_テンプレート</span>
+        </div>
+        <p class="folder-desc">Team RYU共通のテンプレート</p>
+      </div>
+
+      <div class="folder-card">
+        <div class="folder-card-header">
+          <span class="folder-icon">&#128193;</span>
+          <span class="folder-name">07_社内規定</span>
+        </div>
+        <p class="folder-desc">Team RYU共通の社内規定</p>
+      </div>
+
+      <div class="folder-card">
+        <div class="folder-card-header">
+          <span class="folder-icon">&#128193;</span>
+          <span class="folder-name">08_共有資料</span>
+        </div>
+        <p class="folder-desc">自己紹介・AIOX サービス概要等</p>
+        <div class="subfolder-list">
+          <span>&#128194; 自己紹介</span>
+        </div>
+      </div>
+
+      <div class="folder-card">
+        <div class="folder-card-header">
+          <span class="folder-icon">&#128193;</span>
+          <span class="folder-name">99_その他</span>
+        </div>
+        <p class="folder-desc">Markdown原本の保管場所。HTML/PDF/PPTX等の元ファイル（md/）</p>
+        <div class="subfolder-list">
+          <span>&#128194; md</span>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -646,7 +749,7 @@
           <div class="folder-icon"><span>&#128221;</span></div>
           <div>
             <div class="folder-name">01_議事録</div>
-            <div class="folder-meta">デイリーMTG・M&Aヒアリング議事録</div>
+            <div class="folder-meta">デイリーMTG・M&amp;Aヒアリング議事録</div>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
@@ -655,7 +758,7 @@
       </div>
       <div class="accordion-body">
         <div class="accordion-content">
-          <p>プロジェクト期間中の全ミーティング議事録です。デイリーMTGとM&A関連ヒアリングに分類しています。</p>
+          <p>プロジェクト期間中の全ミーティング議事録です。デイリーMTGとM&amp;A関連ヒアリングに分類しています。</p>
 
           <span class="subfolder-label">デイリーMTG/</span>
           <ul class="file-list">
@@ -663,25 +766,26 @@
             <li><span class="ext ext-docx">docx</span>2026_03_18 10:07 JST 会議 - Gemini メモ.docx</li>
           </ul>
 
-          <span class="subfolder-label">M&A/</span>
+          <span class="subfolder-label">M&amp;A/</span>
           <ul class="file-list">
-            <li><span class="ext ext-docx">docx</span>【M&A】丹下様ヒアリング - Gemini メモ.docx</li>
-            <li><span class="ext ext-docx">docx</span>【M&A】南村様ヒアリング - Gemini メモ.docx</li>
-            <li><span class="ext ext-docx">docx</span>【M&A】守屋様ヒアリング - Gemini メモ.docx</li>
+            <li><span class="ext ext-html">html</span>meeting_20260313_ryuichi.html</li>
+            <li><span class="ext ext-html">html</span>meeting_20260313_共有用.html</li>
+            <li><span class="ext ext-pdf">pdf</span>meeting_20260313_共有用.pdf</li>
+            <li><span class="ext ext-html">html</span>meeting_20260316_maeshima.html</li>
+            <li><span class="ext ext-docx">docx</span>【M&amp;A】丹下様ヒアリング - Gemini メモ.docx</li>
+            <li><span class="ext ext-docx">docx</span>【M&amp;A】南村様ヒアリング - Gemini メモ.docx</li>
+            <li><span class="ext ext-docx">docx</span>【M&amp;A】守屋様ヒアリング - Gemini メモ.docx</li>
             <li><span class="ext ext-docx">docx</span>前島さん顔合わせ - Gemini メモ.docx</li>
             <li><span class="ext ext-docx">docx</span>真実 / 涼晴 - Gemini メモ.docx</li>
-            <li><span class="ext ext-md">md</span>meeting_20260313_ryuichi.md</li>
-            <li><span class="ext ext-html">html</span>meeting_20260313_共有用.html</li>
-            <li><span class="ext ext-md">md</span>meeting_20260316_maeshima.md</li>
             <li><span class="ext ext-pdf">pdf</span>会議議事録_20260313.pdf</li>
             <li><span class="ext ext-html">html</span>議事録まとめ_全ヒアリング_20260325.html</li>
           </ul>
 
-          <h4>テンプレート・ヒアリングシート</h4>
+          <h4>テンプレート・ヒアリングシート（01_議事録 直下）</h4>
           <ul class="file-list">
-            <li><span class="ext ext-xlsx">xlsx</span>M&Aバックオフィスヒアリングシート.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>M&amp;Aバックオフィスヒアリングシート.xlsx</li>
             <li><span class="ext ext-xlsx">xlsx</span>ヒアリングシート＆MTGアジェンダ_v02.xlsx</li>
-            <li><span class="ext ext-md">md</span>議事録テンプレート.md</li>
+            <li><span class="ext ext-html">html</span>議事録テンプレート.html</li>
           </ul>
         </div>
       </div>
@@ -694,7 +798,7 @@
           <div class="folder-icon"><span>&#128220;</span></div>
           <div>
             <div class="folder-name">02_契約・法務</div>
-            <div class="folder-meta">契約書・費用構造・各種テンプレート</div>
+            <div class="folder-meta">契約書・各種テンプレート</div>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
@@ -703,14 +807,9 @@
       </div>
       <div class="accordion-body">
         <div class="accordion-content">
-          <p>コンサルティング契約書や費用構造のドキュメント、および契約・法務関連のHTMLテンプレート集です。</p>
-          <ul class="file-list">
-            <li><span class="ext ext-md">md</span>コンサルティング業務委託契約書.md</li>
-            <li><span class="ext ext-xlsx">xlsx</span>【バックオフィス改革】体制・役割・費用構造.xlsx</li>
-          </ul>
+          <p>契約・法務関連のHTMLテンプレート集です。ブラウザで開いて印刷・PDF化できます。</p>
 
           <span class="subfolder-label">テンプレート/</span>
-          <p style="font-size:13px;color:var(--text-mid);">業務委託契約書・NDA・発注書・見積書・請求書のHTMLテンプレート。ブラウザで開いて印刷・PDF化できます。</p>
           <ul class="file-list">
             <li><span class="ext ext-html">html</span>業務委託契約書テンプレート.html</li>
             <li><span class="ext ext-html">html</span>秘密保持契約書（NDA）テンプレート.html</li>
@@ -729,7 +828,7 @@
           <div class="folder-icon"><span>&#128176;</span></div>
           <div>
             <div class="folder-name">03_経理・請求</div>
-            <div class="folder-meta">請求書</div>
+            <div class="folder-meta">経理・請求関連資料</div>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
@@ -738,11 +837,7 @@
       </div>
       <div class="accordion-body">
         <div class="accordion-content">
-          <p>請求書のドキュメントです。</p>
-          <ul class="file-list">
-            <li><span class="ext ext-md">md</span>請求書_202603.md</li>
-            <li><span class="ext ext-pdf">pdf</span>請求書_202603.pdf</li>
-          </ul>
+          <p>経理・請求関連のドキュメントを格納するフォルダです。今後、請求書・領収書・経費精算・月次決算資料等を追加してご利用ください。</p>
         </div>
       </div>
     </div>
@@ -754,7 +849,7 @@
           <div class="folder-icon"><span>&#128101;</span></div>
           <div>
             <div class="folder-name">04_人事・労務</div>
-            <div class="folder-meta">今後追加予定</div>
+            <div class="folder-meta">8カテゴリ・各テンプレート格納済み</div>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
@@ -763,17 +858,47 @@
       </div>
       <div class="accordion-body">
         <div class="accordion-content">
-          <p>人事・労務関連のドキュメントを格納するフォルダです。以下のサブフォルダを用意しています（各フォルダは今後追加予定）。</p>
+          <p>人事・労務関連のドキュメントを8カテゴリに分類し、各フォルダにHTMLテンプレートを格納しています。ブラウザで開いて印刷・PDF化、または内容をカスタマイズしてご利用ください。</p>
 
+          <span class="subfolder-label">就業規則/</span>
           <ul class="file-list">
-            <li><span class="ext ext-folder" style="background:#ebf4ff;color:#2c5282;">folder</span><strong>就業規則/</strong> — 正社員・パート等の労働条件、服務規律など</li>
-            <li><span class="ext ext-folder" style="background:#ebf4ff;color:#2c5282;">folder</span><strong>給与規程/</strong> — 給与体系、昇給・賞与、手当の基準など</li>
-            <li><span class="ext ext-folder" style="background:#ebf4ff;color:#2c5282;">folder</span><strong>雇用契約書/</strong> — 労働条件通知書、雇用契約書のひな形・締結済み書類など</li>
-            <li><span class="ext ext-folder" style="background:#ebf4ff;color:#2c5282;">folder</span><strong>入退社手続き/</strong> — 入社時・退社時のチェックリスト、必要書類など</li>
-            <li><span class="ext ext-folder" style="background:#ebf4ff;color:#2c5282;">folder</span><strong>勤怠管理/</strong> — 出勤簿、残業申請、勤怠ルールなど</li>
-            <li><span class="ext ext-folder" style="background:#ebf4ff;color:#2c5282;">folder</span><strong>社会保険・労働保険/</strong> — 健康保険・厚生年金・雇用保険・労災の届出書類など</li>
-            <li><span class="ext ext-folder" style="background:#ebf4ff;color:#2c5282;">folder</span><strong>有給休暇管理/</strong> — 有給休暇付与台帳、取得状況管理表など</li>
-            <li><span class="ext ext-folder" style="background:#ebf4ff;color:#2c5282;">folder</span><strong>組織図・人員配置/</strong> — 組織図、部門別人員一覧、配置表など</li>
+            <li><span class="ext ext-html">html</span>就業規則テンプレート.html</li>
+          </ul>
+
+          <span class="subfolder-label">給与規程/</span>
+          <ul class="file-list">
+            <li><span class="ext ext-html">html</span>給与規程テンプレート.html</li>
+          </ul>
+
+          <span class="subfolder-label">雇用契約書/</span>
+          <ul class="file-list">
+            <li><span class="ext ext-html">html</span>雇用契約書テンプレート.html</li>
+          </ul>
+
+          <span class="subfolder-label">入退社手続き/</span>
+          <ul class="file-list">
+            <li><span class="ext ext-html">html</span>入社手続きチェックリスト.html</li>
+            <li><span class="ext ext-html">html</span>退社手続きチェックリスト.html</li>
+          </ul>
+
+          <span class="subfolder-label">勤怠管理/</span>
+          <ul class="file-list">
+            <li><span class="ext ext-html">html</span>勤怠管理表テンプレート.html</li>
+          </ul>
+
+          <span class="subfolder-label">社会保険・労働保険/</span>
+          <ul class="file-list">
+            <li><span class="ext ext-html">html</span>社会保険手続きチェックリスト.html</li>
+          </ul>
+
+          <span class="subfolder-label">有給休暇管理/</span>
+          <ul class="file-list">
+            <li><span class="ext ext-html">html</span>有給休暇管理表テンプレート.html</li>
+          </ul>
+
+          <span class="subfolder-label">組織図・人員配置/</span>
+          <ul class="file-list">
+            <li><span class="ext ext-html">html</span>組織図テンプレート.html</li>
           </ul>
         </div>
       </div>
@@ -786,7 +911,7 @@
           <div class="folder-icon"><span>&#128202;</span></div>
           <div>
             <div class="folder-name">05_プロジェクト</div>
-            <div class="folder-meta">M&Aバックオフィス・globe・旅録・SNS運用</div>
+            <div class="folder-meta">PMBOK準拠の標準プロジェクト構成（7フォルダ）</div>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
@@ -795,69 +920,96 @@
       </div>
       <div class="accordion-body">
         <div class="accordion-content">
-          <p>プロジェクト別に資料を格納しています。現在はM&Aバックオフィス改革プロジェクトの資料が中心です。globe・旅録・隆一さんSNS運用は今後用の空フォルダです。</p>
+          <p>各プロジェクトはPMBOK準拠の標準7フォルダ構成で統一しています：<br>
+          <strong>01_プロジェクト管理 / 02_要件・計画 / 03_成果物 / 04_議事録・MTG / 05_提案資料 / 06_マニュアル・ガイド / 07_ツール・自動化</strong><br>
+          新規プロジェクトもこの構成に沿ってフォルダを作成してください。</p>
 
-          <h4>M&Aバックオフィス/業務フロー/</h4>
+          <h4>01_M&amp;Aバックオフィス / 01_プロジェクト管理</h4>
+          <p style="font-size:13px;color:var(--text-mid);">PMBOK準拠の管理文書9点・進捗管理表・WBS</p>
+          <ul class="file-list">
+            <li><span class="ext ext-html">html</span>01_プロジェクト憲章.html</li>
+            <li><span class="ext ext-html">html</span>02_スコープ記述書.html</li>
+            <li><span class="ext ext-html">html</span>03_WBS.html</li>
+            <li><span class="ext ext-html">html</span>04_スケジュール_ガントチャート.html</li>
+            <li><span class="ext ext-html">html</span>05_リスク登録簿.html</li>
+            <li><span class="ext ext-html">html</span>06_ステークホルダー管理台帳.html</li>
+            <li><span class="ext ext-html">html</span>07_コミュニケーション計画.html</li>
+            <li><span class="ext ext-html">html</span>08_課題管理台帳.html</li>
+            <li><span class="ext ext-html">html</span>09_変更管理台帳.html</li>
+            <li><span class="ext ext-xlsx">xlsx</span>プロジェクト管理ボード.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>進捗管理表_株式会社M&amp;A組織改革プロジェクト.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>デイリー報告.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>承認フロー管理.xlsx</li>
+            <li><span class="ext ext-docx">docx</span>MTG運用ルール.docx</li>
+            <li><span class="ext ext-docx">docx</span>アジェンダテンプレート.docx</li>
+          </ul>
+
+          <h4>01_M&amp;Aバックオフィス / 02_要件・計画</h4>
+          <p style="font-size:13px;color:var(--text-mid);">バックオフィス改革の全体計画・ロードマップ・Phase1実装計画</p>
+          <ul class="file-list">
+            <li><span class="ext ext-html">html</span>00_ロードマップ概要.html</li>
+            <li><span class="ext ext-html">html</span>01_Dropboxフォルダ分析レポート.html</li>
+            <li><span class="ext ext-html">html</span>01_業務フロー_給与振込.html</li>
+            <li><span class="ext ext-html">html</span>02_Dropboxフォルダ整理提案.html</li>
+            <li><span class="ext ext-html">html</span>03_自動化候補リスト.html</li>
+            <li><span class="ext ext-html">html</span>04_銀行窓口トークスクリプト.html</li>
+            <li><span class="ext ext-html">html</span>05_ツール権限マトリクス.html</li>
+            <li><span class="ext ext-html">html</span>06_経理カレンダー.html</li>
+            <li><span class="ext ext-html">html</span>07_個人情報管理規程_エグゼクティブサマリー.html</li>
+            <li><span class="ext ext-pdf">pdf</span>07_個人情報管理規程_エグゼクティブサマリー.pdf</li>
+            <li><span class="ext ext-html">html</span>08_LINE個人情報禁止通達.html</li>
+            <li><span class="ext ext-pdf">pdf</span>08_LINE個人情報禁止通達.pdf</li>
+            <li><span class="ext ext-html">html</span>09_身分証廃棄フロー簡易マニュアル.html</li>
+            <li><span class="ext ext-pdf">pdf</span>09_身分証廃棄フロー簡易マニュアル.pdf</li>
+            <li><span class="ext ext-pptx">pptx</span>M&amp;A バックオフィス改革 エグゼクティブサマリー v2.0.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>M&amp;A バックオフィス改革 エグゼクティブサマリー v2.1(修正版).pptx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>M&amp;A バックオフィス改革ロードマップ v2.0.xlsx</li>
+            <li><span class="ext ext-pptx">pptx</span>M&amp;Aグループ バックオフィス改革ロードマップ v02.pptx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>M&amp;Aグループ バックオフィス改革ロードマップ【完全版】v02.xlsx</li>
+            <li><span class="ext ext-pptx">pptx</span>M&amp;A株式会社 Phase1 進め方（隆一さん確認用）.pptx</li>
+            <li><span class="ext ext-pdf">pdf</span>Phase1実装計画_20260313.pdf</li>
+            <li><span class="ext ext-html">html</span>phase1_implementation_plan_20260313.html</li>
+            <li><span class="ext ext-html">html</span>タイムライン_20260318.html</li>
+            <li><span class="ext ext-html">html</span>タイムライン_20260319.html</li>
+            <li><span class="ext ext-html">html</span>次期アクションプラン_20260305.html</li>
+          </ul>
+
+          <h4>01_M&amp;Aバックオフィス / 03_成果物</h4>
+          <p style="font-size:13px;color:var(--text-mid);">業務フロー・セキュリティ・テンプレートの3カテゴリに分類</p>
+
+          <span class="subfolder-label">業務フロー/</span>
           <p style="font-size:13px;color:var(--text-mid);">給与計算・振込・税務の現状フロー（As-Is）</p>
           <ul class="file-list">
             <li><span class="ext ext-html">html</span>業務フロー_AsIs_完全版_20260325.html</li>
           </ul>
-          <span class="subfolder-label">給与計算/</span>
+          <span class="subfolder-label">業務フロー / 給与計算/</span>
           <ul class="file-list">
-            <li><span class="ext ext-md">md</span>業務フロー_給与計算_AsIs_20260325.md</li>
-            <li><span class="ext ext-md">md</span>給与パターン整理フォーマット_20260313.md</li>
+            <li><span class="ext ext-html">html</span>業務フロー_給与計算_AsIs_20260325.html</li>
+            <li><span class="ext ext-html">html</span>給与パターン整理フォーマット_20260313.html</li>
             <li><span class="ext ext-xlsx">xlsx</span>Team RYU 給与計算チェック.xlsx</li>
             <li><span class="ext ext-xlsx">xlsx</span>group_payroll_flow.xlsx</li>
             <li><span class="ext ext-xlsx">xlsx</span>host_payroll_flow.xlsx</li>
           </ul>
-          <span class="subfolder-label">振込/</span>
+          <span class="subfolder-label">業務フロー / 振込/</span>
           <ul class="file-list">
-            <li><span class="ext ext-md">md</span>業務フロー_振込_AsIs_20260325.md</li>
-            <li><span class="ext ext-md">md</span>給与振込_Yoom自動化フローツリー.md</li>
-            <li><span class="ext ext-md">md</span>給与振込フローツリー_20260313.md</li>
+            <li><span class="ext ext-html">html</span>業務フロー_振込_AsIs_20260325.html</li>
+            <li><span class="ext ext-html">html</span>給与振込_Yoom自動化フローツリー.html</li>
+            <li><span class="ext ext-html">html</span>給与振込フローツリー_20260313.html</li>
             <li><span class="ext ext-pdf">pdf</span>給与振込フローツリー_20260313.pdf</li>
             <li><span class="ext ext-pptx">pptx</span>給与振込フロー_As-Is_v8.1_20260318.pptx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>【M&A】給与振込管理.xlsx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>【M&A】スタッフ口座マスタ.xlsx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>【M&A】口座情報入力フォーム.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&amp;A】給与振込管理.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&amp;A】スタッフ口座マスタ.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&amp;A】口座情報入力フォーム.xlsx</li>
             <li><span class="ext ext-xlsx">xlsx</span>給与振込フロー_QA表_20260313.xlsx</li>
             <li><span class="ext ext-xlsx">xlsx</span>給与振込フロー_ヒアリング項目表.xlsx</li>
           </ul>
-          <span class="subfolder-label">税務/</span>
+          <span class="subfolder-label">業務フロー / 税務/</span>
           <ul class="file-list">
-            <li><span class="ext ext-md">md</span>業務フロー_税務処理_AsIs_20260325.md</li>
+            <li><span class="ext ext-html">html</span>業務フロー_税務処理_AsIs_20260325.html</li>
             <li><span class="ext ext-xlsx">xlsx</span>tax_flow.xlsx</li>
           </ul>
 
-          <h4>M&Aバックオフィス/ロードマップ・計画/</h4>
-          <p style="font-size:13px;color:var(--text-mid);">バックオフィス改革の全体計画とPhase1実装計画</p>
-          <ul class="file-list">
-            <li><span class="ext ext-md">md</span>00_ロードマップ概要.md</li>
-            <li><span class="ext ext-md">md</span>01_Dropboxフォルダ分析レポート.md</li>
-            <li><span class="ext ext-md">md</span>01_業務フロー_給与振込.md</li>
-            <li><span class="ext ext-md">md</span>02_Dropboxフォルダ整理提案.md</li>
-            <li><span class="ext ext-md">md</span>03_自動化候補リスト.md</li>
-            <li><span class="ext ext-md">md</span>04_銀行窓口トークスクリプト.md</li>
-            <li><span class="ext ext-md">md</span>05_ツール権限マトリクス.md</li>
-            <li><span class="ext ext-md">md</span>06_経理カレンダー.md</li>
-            <li><span class="ext ext-md">md</span>07_個人情報管理規程_エグゼクティブサマリー.md</li>
-            <li><span class="ext ext-pdf">pdf</span>07_個人情報管理規程_エグゼクティブサマリー.pdf</li>
-            <li><span class="ext ext-md">md</span>08_LINE個人情報禁止通達.md</li>
-            <li><span class="ext ext-pdf">pdf</span>08_LINE個人情報禁止通達.pdf</li>
-            <li><span class="ext ext-md">md</span>09_身分証廃棄フロー簡易マニュアル.md</li>
-            <li><span class="ext ext-pdf">pdf</span>09_身分証廃棄フロー簡易マニュアル.pdf</li>
-            <li><span class="ext ext-pptx">pptx</span>M&A バックオフィス改革 エグゼクティブサマリー v2.0.pptx</li>
-            <li><span class="ext ext-pptx">pptx</span>M&A バックオフィス改革 エグゼクティブサマリー v2.1(修正版).pptx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>M&A バックオフィス改革ロードマップ v2.0.xlsx</li>
-            <li><span class="ext ext-pptx">pptx</span>M&Aグループ バックオフィス改革ロードマップ v02.pptx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>M&Aグループ バックオフィス改革ロードマップ【完全版】v02.xlsx</li>
-            <li><span class="ext ext-pptx">pptx</span>M&A株式会社 Phase1 進め方（隆一さん確認用）.pptx</li>
-            <li><span class="ext ext-pdf">pdf</span>Phase1実装計画_20260313.pdf</li>
-            <li><span class="ext ext-md">md</span>タイムライン_20260318.md</li>
-            <li><span class="ext ext-md">md</span>タイムライン_20260319.md</li>
-          </ul>
-
-          <h4>M&Aバックオフィス/セキュリティ/</h4>
+          <span class="subfolder-label">セキュリティ/</span>
           <p style="font-size:13px;color:var(--text-mid);">情報セキュリティ規程・LINE禁止通達・退職者対応。サブフォルダで分類しています。</p>
           <ul class="file-list">
             <li><span class="ext ext-docx">docx</span>個人LINE業務利用禁止_通達文書.docx</li>
@@ -865,36 +1017,92 @@
             <li><span class="ext ext-docx">docx</span>個人情報保管期間・破棄規定.docx</li>
             <li><span class="ext ext-docx">docx</span>個人情報保護_業務ツール利用誓約書.docx</li>
           </ul>
-          <span class="subfolder-label">01_ルール・規定/</span>
+          <span class="subfolder-label">セキュリティ / 01_ルール・規定/</span>
           <ul class="file-list">
             <li><span class="ext ext-docx">docx</span>個人LINE業務利用禁止_通達文書.docx</li>
             <li><span class="ext ext-docx">docx</span>個人LINE業務利用禁止_運用マニュアル.docx</li>
             <li><span class="ext ext-docx">docx</span>個人情報保管期間・破棄規定.docx</li>
           </ul>
-          <span class="subfolder-label">02_マニュアル・手順書/</span>
+          <span class="subfolder-label">セキュリティ / 02_マニュアル・手順書/</span>
           <ul class="file-list">
             <li><span class="ext ext-docx">docx</span>スマホPC紛失時_緊急対応マニュアル.docx</li>
             <li><span class="ext ext-docx">docx</span>退職時情報管理手順書.docx</li>
             <li><span class="ext ext-docx">docx</span>退職者Googleアカウント停止マニュアル.docx</li>
           </ul>
-          <span class="subfolder-label">03_権限設計・フォルダ設計/</span>
+          <span class="subfolder-label">セキュリティ / 03_権限設計・フォルダ設計/</span>
           <ul class="file-list">
             <li><span class="ext ext-xlsx">xlsx</span>共有ドライブ_権限マトリクス表.xlsx</li>
           </ul>
-          <span class="subfolder-label">04_誓約書・同意書/</span>
+          <span class="subfolder-label">セキュリティ / 04_誓約書・同意書/</span>
           <ul class="file-list">
             <li><span class="ext ext-docx">docx</span>個人情報保護_業務ツール利用誓約書.docx</li>
           </ul>
-          <span class="subfolder-label">06_管理台帳/</span>
+          <span class="subfolder-label">セキュリティ / 06_管理台帳/</span>
           <ul class="file-list">
             <li><span class="ext ext-xlsx">xlsx</span>タスク一覧_情報セキュリティ移行.xlsx</li>
           </ul>
 
-          <h4>M&Aバックオフィス/自動化/</h4>
+          <span class="subfolder-label">テンプレート/</span>
+          <p style="font-size:13px;color:var(--text-mid);">Excel管理台帳・チェックリスト・振込CSV等、実務で使えるテンプレート</p>
+          <ul class="file-list">
+            <li><span class="ext ext-html">html</span>10_個人情報管理規程.html</li>
+            <li><span class="ext ext-pdf">pdf</span>10_個人情報管理規程.pdf</li>
+            <li><span class="ext ext-xlsx">xlsx</span>10_個人情報管理規程.xlsx</li>
+            <li><span class="ext ext-html">html</span>11_承認フロー設計書.html</li>
+            <li><span class="ext ext-xlsx">xlsx</span>11_承認フロー設計書.xlsx</li>
+            <li><span class="ext ext-html">html</span>12_給与計算標準化マニュアル.html</li>
+            <li><span class="ext ext-xlsx">xlsx</span>12_給与計算標準化マニュアル.xlsx</li>
+            <li><span class="ext ext-html">html</span>13_GoogleWorkspace運用ガイドライン.html</li>
+            <li><span class="ext ext-xlsx">xlsx</span>13_GoogleWorkspace運用ガイドライン.xlsx</li>
+            <li><span class="ext ext-html">html</span>14_IT権限管理台帳テンプレート.html</li>
+            <li><span class="ext ext-xlsx">xlsx</span>14_IT権限管理台帳テンプレート.xlsx</li>
+            <li><span class="ext ext-html">html</span>15_退職者アカウント削除フロー.html</li>
+            <li><span class="ext ext-xlsx">xlsx</span>15_退職者アカウント削除フロー.xlsx</li>
+            <li><span class="ext ext-html">html</span>16_投資案件稟議フォーマット.html</li>
+            <li><span class="ext ext-xlsx">xlsx</span>16_投資案件稟議フォーマット.xlsx</li>
+            <li><span class="ext ext-html">html</span>17_組織図_メンバー一覧.html</li>
+            <li><span class="ext ext-xlsx">xlsx</span>17_組織図_メンバー一覧.xlsx</li>
+            <li><span class="ext ext-html">html</span>18_LINE禁止_GoogleChat移行フロー_ペライチ.html</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&amp;A】スタッフ口座情報マスタ.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&amp;A】ツール・権限マトリクス.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&amp;A】振込チェックリスト.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&amp;A】業務フロー・自動化候補.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&amp;A】経理カレンダー（月次・年次）.xlsx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&amp;A】通知テンプレート集（Yoom用）.xlsx</li>
+            <li><span class="ext ext-csv">csv</span>振込CSV_UFJ用.csv</li>
+            <li><span class="ext ext-csv">csv</span>振込CSV_愛知銀行用.csv</li>
+            <li><span class="ext ext-docx">docx</span>週次プロジェクトMTG アジェンダテンプレート.docx</li>
+            <li><span class="ext ext-docx">docx</span>銀行窓口対応トークスクリプト＆チェックリスト v1.0.docx</li>
+          </ul>
+
+          <h4>01_M&amp;Aバックオフィス / 05_提案資料</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-html">html</span>AIOX_TeamRYU_1枚サマリー.html</li>
+            <li><span class="ext ext-html">html</span>AIOX_TeamRYU_サービス概要_最新.html</li>
+            <li><span class="ext ext-pptx">pptx</span>AIOX_TeamRYU_営業資料.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>AIOX_TeamRYU_営業資料_v2.pptx</li>
+            <li><span class="ext ext-docx">docx</span>Dropboxフォルダ構成分析レポート v1.0.docx</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【バックオフィス改革】体制・役割・費用構造.xlsx</li>
+            <li><span class="ext ext-pptx">pptx</span>グロジャンフェスタ2026_提案資料_v3.pptx</li>
+            <li><span class="ext ext-html">html</span>朝会QA想定_20260318.html</li>
+            <li><span class="ext ext-html">html</span>朝会プレゼン台本_20260318.html</li>
+            <li><span class="ext ext-pptx">pptx</span>株式会社M&amp;A_組織改革プロジェクト_全体像.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>社内DX導入計画_LINE移行フロー.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>社内DX導入計画_LINE移行フロー_v2.pptx</li>
+          </ul>
+
+          <h4>01_M&amp;Aバックオフィス / 06_マニュアル・ガイド</h4>
+          <ul class="file-list">
+            <li><span class="ext ext-html">html</span>GoogleWorkspace_操作マニュアル.html</li>
+            <li><span class="ext ext-html">html</span>yoom_構築進捗_20260315.html</li>
+            <li><span class="ext ext-html">html</span>yoom_調査レポート_20260315.html</li>
+          </ul>
+
+          <h4>01_M&amp;Aバックオフィス / 07_ツール・自動化</h4>
           <p style="font-size:13px;color:var(--text-mid);">Yoom自動化フローとClaude AI導入ガイド</p>
           <ul class="file-list">
-            <li><span class="ext ext-md">md</span>給与振込_Yoom自動化フローツリー.md</li>
-            <li><span class="ext ext-xlsx">xlsx</span>【M&A】通知テンプレート集（Yoom用）.xlsx</li>
+            <li><span class="ext ext-html">html</span>給与振込_Yoom自動化フローツリー.html</li>
+            <li><span class="ext ext-xlsx">xlsx</span>【M&amp;A】通知テンプレート集（Yoom用）.xlsx</li>
           </ul>
           <span class="subfolder-label">Claude/</span>
           <p style="font-size:13px;color:var(--text-mid);">Claude Code（AI）の導入ガイド・セットアップウィザード・使い分けガイド</p>
@@ -906,82 +1114,19 @@
             <li><span class="ext ext-pptx">pptx</span>やりたいこと別 Claude 使い分けガイド.pptx</li>
           </ul>
 
-          <h4>M&Aバックオフィス/提案資料/</h4>
-          <ul class="file-list">
-            <li><span class="ext ext-md">md</span>AIOX_TeamRYU_サービス概要_最新.md</li>
-            <li><span class="ext ext-pptx">pptx</span>AIOX_TeamRYU_営業資料.pptx</li>
-            <li><span class="ext ext-pptx">pptx</span>AIOX_TeamRYU_営業資料_v2.pptx</li>
-            <li><span class="ext ext-docx">docx</span>Dropboxフォルダ構成分析レポート v1.0.docx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>【バックオフィス改革】体制・役割・費用構造.xlsx</li>
-            <li><span class="ext ext-pptx">pptx</span>グロジャンフェスタ2026_提案資料_v3.pptx</li>
-            <li><span class="ext ext-md">md</span>朝会QA想定_20260318.md</li>
-            <li><span class="ext ext-md">md</span>朝会プレゼン台本_20260318.md</li>
-            <li><span class="ext ext-pptx">pptx</span>株式会社M&A_組織改革プロジェクト_全体像.pptx</li>
-            <li><span class="ext ext-pptx">pptx</span>社内DX導入計画_LINE移行フロー.pptx</li>
-            <li><span class="ext ext-pptx">pptx</span>社内DX導入計画_LINE移行フロー_v2.pptx</li>
-          </ul>
+          <h4 style="margin-top:24px;">02_globe / 03_旅録（空フォルダ）</h4>
+          <p style="font-size:13px;color:var(--text-mid);">今後用の空プロジェクトフォルダです。M&amp;Aバックオフィスと同じ7フォルダ構成（01_プロジェクト管理〜07_ツール・自動化）を用意済み。案件が始まったらそのまま使えます。</p>
 
-          <h4>M&Aバックオフィス/マニュアル・ガイド/</h4>
+          <h4>04_隆一さんSNS運用</h4>
+          <p style="font-size:13px;color:var(--text-mid);">同じ7フォルダ構成。03_成果物にSNS運用方針・投稿例等を格納済み。</p>
+          <span class="subfolder-label">03_成果物/</span>
           <ul class="file-list">
-            <li><span class="ext ext-html">html</span>GoogleWorkspace_操作マニュアル.html</li>
-            <li><span class="ext ext-html">html</span>yoom_構築進捗_20260315.html</li>
-            <li><span class="ext ext-html">html</span>yoom_調査レポート_20260315.html</li>
-          </ul>
-
-          <h4>M&Aバックオフィス/テンプレート/</h4>
-          <p style="font-size:13px;color:var(--text-mid);">Excel管理台帳・チェックリスト・振込CSV等、実務で使えるテンプレート27ファイル</p>
-          <ul class="file-list">
-            <li><span class="ext ext-xlsx">xlsx</span>10_個人情報管理規程.xlsx</li>
-            <li><span class="ext ext-pdf">pdf</span>10_個人情報管理規程.pdf</li>
-            <li><span class="ext ext-xlsx">xlsx</span>11_承認フロー設計書.xlsx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>12_給与計算標準化マニュアル.xlsx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>13_GoogleWorkspace運用ガイドライン.xlsx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>14_IT権限管理台帳テンプレート.xlsx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>15_退職者アカウント削除フロー.xlsx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>16_投資案件稟議フォーマット.xlsx</li>
-            <li><span class="ext ext-md">md</span>17_組織図_メンバー一覧.md</li>
-            <li><span class="ext ext-md">md</span>18_LINE禁止_GoogleChat移行フロー_ペライチ.md</li>
-            <li><span class="ext ext-xlsx">xlsx</span>【M&A】スタッフ口座情報マスタ.xlsx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>【M&A】ツール・権限マトリクス.xlsx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>【M&A】振込チェックリスト.xlsx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>【M&A】業務フロー・自動化候補.xlsx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>【M&A】経理カレンダー（月次・年次）.xlsx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>【M&A】通知テンプレート集（Yoom用）.xlsx</li>
-            <li><span class="ext ext-csv">csv</span>振込CSV_UFJ用.csv</li>
-            <li><span class="ext ext-csv">csv</span>振込CSV_愛知銀行用.csv</li>
-            <li><span class="ext ext-docx">docx</span>週次プロジェクトMTG アジェンダテンプレート.docx</li>
-            <li><span class="ext ext-docx">docx</span>銀行窓口対応トークスクリプト＆チェックリスト v1.0.docx</li>
-          </ul>
-
-          <h4>M&Aバックオフィス/プロジェクト管理/</h4>
-          <p style="font-size:13px;color:var(--text-mid);">PMBOK準拠の管理文書・Phase1計画</p>
-          <ul class="file-list">
-            <li><span class="ext ext-md">md</span>07_個人情報管理規程_エグゼクティブサマリー.md</li>
-            <li><span class="ext ext-pdf">pdf</span>07_個人情報管理規程_エグゼクティブサマリー.pdf</li>
-            <li><span class="ext ext-pptx">pptx</span>M&A株式会社 Phase1 進め方（隆一さん確認用）.pptx</li>
-            <li><span class="ext ext-pdf">pdf</span>Phase1実装計画_20260313.pdf</li>
-          </ul>
-
-          <h4>M&Aバックオフィス/（ルート直下のプロジェクト管理文書）</h4>
-          <p style="font-size:13px;color:var(--text-mid);">PMBOK準拠の管理文書9点・進捗管理表・WBS</p>
-          <ul class="file-list">
-            <li><span class="ext ext-md">md</span>01_プロジェクト憲章.md ~ 09_変更管理台帳.md（PMBOK文書9点）</li>
-            <li><span class="ext ext-xlsx">xlsx</span>プロジェクト管理ボード.xlsx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>進捗管理表_株式会社M&A組織改革プロジェクト.xlsx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>デイリー報告.xlsx</li>
-            <li><span class="ext ext-xlsx">xlsx</span>承認フロー管理.xlsx</li>
-            <li><span class="ext ext-docx">docx</span>MTG運用ルール.docx</li>
-            <li><span class="ext ext-docx">docx</span>アジェンダテンプレート.docx</li>
-            <li><span class="ext ext-pdf">pdf</span>Phase1実装計画_20260313.pdf</li>
-            <li><span class="ext ext-md">md</span>phase1_implementation_plan_20260313.md</li>
-            <li><span class="ext ext-md">md</span>次期アクションプラン_20260305.md</li>
-          </ul>
-
-          <h4 style="margin-top:16px;color:var(--text-light);">今後用フォルダ</h4>
-          <ul class="file-list">
-            <li>globe/ &mdash; 今後のglobe案件用</li>
-            <li>旅録/ &mdash; 今後の旅録案件用</li>
-            <li>隆一さんSNS運用/ &mdash; 今後のSNS運用案件用</li>
+            <li><span class="ext ext-html">html</span>SNS運用方針.html</li>
+            <li><span class="ext ext-html">html</span>30日投稿カレンダー.html</li>
+            <li><span class="ext ext-html">html</span>投稿例_Instagram.html</li>
+            <li><span class="ext ext-html">html</span>投稿例_TikTok.html</li>
+            <li><span class="ext ext-html">html</span>投稿例_X.html</li>
+            <li><span class="ext ext-html">html</span>投稿例_note.html</li>
           </ul>
         </div>
       </div>
@@ -1003,7 +1148,7 @@
       </div>
       <div class="accordion-body">
         <div class="accordion-content">
-          <p>Team RYU全体で共通利用するテンプレート集です。M&A固有のテンプレートは <strong>05_プロジェクト/M&Aバックオフィス/テンプレート/</strong> に移動しました。</p>
+          <p>Team RYU全体で共通利用するテンプレート集です。M&amp;A固有のテンプレートは <strong>05_プロジェクト/01_M&amp;Aバックオフィス/03_成果物/テンプレート/</strong> に格納しています。</p>
           <ul class="file-list">
             <li><span class="ext ext-pdf">pdf</span>10_個人情報管理規程.pdf</li>
             <li><span class="ext ext-docx">docx</span>週次プロジェクトMTG アジェンダテンプレート.docx</li>
@@ -1029,7 +1174,7 @@
       </div>
       <div class="accordion-body">
         <div class="accordion-content">
-          <p>Team RYU全体で共有・運用すべき規定文書です。M&A固有のセキュリティ規定は <strong>05_プロジェクト/M&Aバックオフィス/セキュリティ/</strong> に格納しています。</p>
+          <p>Team RYU全体で共有・運用すべき規定文書です。M&amp;A固有のセキュリティ規定は <strong>05_プロジェクト/01_M&amp;Aバックオフィス/03_成果物/セキュリティ/</strong> に格納しています。</p>
           <ul class="file-list">
             <li><span class="ext ext-docx">docx</span>個人LINE業務利用禁止_通達文書.docx</li>
             <li><span class="ext ext-docx">docx</span>個人LINE業務利用禁止_運用マニュアル.docx</li>
@@ -1047,7 +1192,7 @@
           <div class="folder-icon"><span>&#128214;</span></div>
           <div>
             <div class="folder-name">08_共有資料</div>
-            <div class="folder-meta">自己紹介・サービス概要・全員向け資料</div>
+            <div class="folder-meta">自己紹介・AIOX サービス概要</div>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
@@ -1057,20 +1202,46 @@
       <div class="accordion-body">
         <div class="accordion-content">
           <p>チーム全員向けの共有資料です。自己紹介ピッチ資料やサービス概要など。</p>
-          <p style="font-size:13px;color:var(--text-mid);">※ Claude Codeガイドは <strong>05_プロジェクト/M&Aバックオフィス/自動化/Claude/</strong> に移動しました。</p>
 
-          <h4>自己紹介/</h4>
+          <span class="subfolder-label">自己紹介/</span>
           <ul class="file-list">
             <li><span class="ext ext-pptx">pptx</span>SELF_INTRODUCTION_RYOSEI.pptx</li>
-            <li><span class="ext ext-pptx">pptx</span>今井涼晴_自己紹介ピッチ.pptx / v2.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>今井涼晴_自己紹介ピッチ.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>今井涼晴_自己紹介ピッチ_v2.pptx</li>
             <li><span class="ext ext-pptx">pptx</span>りょうせい_自己紹介ピッチ_v2.pptx</li>
-            <li><span class="ext ext-pptx">pptx</span>涼晴_自己紹介ピッチ_v2.pptx / v3.pptx / v4.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>涼晴_自己紹介ピッチ_v2.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>涼晴_自己紹介ピッチ_v3.pptx</li>
+            <li><span class="ext ext-pptx">pptx</span>涼晴_自己紹介ピッチ_v4.pptx</li>
           </ul>
 
-          <h4>その他</h4>
+          <h4>AIOX資料</h4>
           <ul class="file-list">
             <li><span class="ext ext-html">html</span>AIOX_TeamRYU_サービス概要.html</li>
           </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 99_その他 -->
+    <div class="accordion" data-folder="99">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="folder-info">
+          <div class="folder-icon"><span>&#128451;</span></div>
+          <div>
+            <div class="folder-name">99_その他</div>
+            <div class="folder-meta">Markdown原本・アーカイブ</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="arrow">&#9660;</span>
+        </div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-content">
+          <p>各フォルダに格納されているHTML/PDF/PPTX等の元となったMarkdownファイル（.md）を保管しています。内容の編集・再生成が必要な場合にご利用ください。</p>
+
+          <span class="subfolder-label">md/</span>
+          <p style="font-size:13px;color:var(--text-mid);">プロジェクト憲章・業務フロー・議事録・テンプレート等のMarkdown原本（約50ファイル）</p>
         </div>
       </div>
     </div>
@@ -1087,10 +1258,11 @@
         <div class="card-label now">Now &mdash; すぐやれること</div>
         <h4>今日から使える</h4>
         <ul>
-          <li><strong>05_プロジェクト/M&Aバックオフィス/テンプレート</strong> のExcel台帳を実務で活用（振込チェックリスト、経理カレンダーなど）</li>
+          <li><strong>05_プロジェクト/01_M&amp;Aバックオフィス/03_成果物/テンプレート</strong> のExcel台帳を実務で活用（振込チェックリスト、経理カレンダーなど）</li>
+          <li><strong>04_人事・労務</strong> の各テンプレート（就業規則・給与規程・雇用契約書等）をカスタマイズして運用開始</li>
           <li><strong>07_社内規定</strong> のLINE禁止通達・誓約書を社内に共有</li>
           <li><strong>02_契約・法務/テンプレート</strong> の契約書・NDA・見積書テンプレートを活用</li>
-          <li><strong>05_プロジェクト/M&Aバックオフィス/自動化/Claude</strong> のガイドでAI導入を検討</li>
+          <li><strong>05_プロジェクト/01_M&amp;Aバックオフィス/07_ツール・自動化/Claude</strong> のガイドでAI導入を検討</li>
         </ul>
       </div>
 
@@ -1098,9 +1270,9 @@
         <div class="card-label next">Next &mdash; 次のステップ</div>
         <h4>1~3ヶ月で取り組む</h4>
         <ul>
-          <li><strong>05_プロジェクト/M&Aバックオフィス/業務フロー</strong> のAs-Isを元に、To-Be（理想フロー）を作成</li>
-          <li><strong>05_プロジェクト/M&Aバックオフィス/自動化</strong> のYoomフロー設計を参考に、自動化を実装</li>
-          <li><strong>05_プロジェクト/M&Aバックオフィス/プロジェクト管理</strong> のPhase1計画に沿って進捗管理を定着させる</li>
+          <li><strong>05_プロジェクト/01_M&amp;Aバックオフィス/03_成果物/業務フロー</strong> のAs-Isを元に、To-Be（理想フロー）を作成</li>
+          <li><strong>05_プロジェクト/01_M&amp;Aバックオフィス/07_ツール・自動化</strong> のYoomフロー設計を参考に、自動化を実装</li>
+          <li><strong>05_プロジェクト/01_M&amp;Aバックオフィス/01_プロジェクト管理</strong> のPMBOK文書に沿って進捗管理を定着させる</li>
         </ul>
       </div>
 
@@ -1108,9 +1280,10 @@
         <div class="card-label future">Future &mdash; 長期的な改善</div>
         <h4>3ヶ月以降の取り組み</h4>
         <ul>
-          <li><strong>05_プロジェクト/M&Aバックオフィス/ロードマップ・計画</strong> に沿ったDX推進の継続</li>
+          <li><strong>05_プロジェクト/01_M&amp;Aバックオフィス/02_要件・計画</strong> のロードマップに沿ったDX推進の継続</li>
           <li>Dropboxフォルダ整理・Google Workspace完全移行</li>
-          <li>PMBOK管理手法の社内定着と継続的改善（<strong>05_プロジェクト/M&Aバックオフィス</strong> のPMBOK文書9点を活用）</li>
+          <li>PMBOK管理手法の社内定着と継続的改善（PMBOK文書9点を活用）</li>
+          <li>新規プロジェクト（globe・旅録等）は <strong>05_プロジェクト</strong> の標準7フォルダ構成をそのまま利用</li>
         </ul>
       </div>
     </div>
